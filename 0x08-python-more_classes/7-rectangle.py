@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 
-# 4-rectangle module
+# 7-rectangle module
 """
 This module contains a class Rectangle
 
->>> Rectangle = __import__('4-rectangle').Rectangle
+>>> Rectangle = __import__('7-rectangle').Rectangle
 
 >>> my_rectangle = Rectangle(2, 4)
 >>> print(type(my_rectangle))
-<class '4-rectangle.Rectangle'>
+<class '7-rectangle.Rectangle'>
 
 >>> dict_result = my_rectangle.__dict__
 >>> print(dict(sorted(dict_result.items())))
@@ -19,6 +19,9 @@ This module contains a class Rectangle
 
 class Rectangle:
     """This is an class Rectangle with instance attribute heigth and width"""
+
+    number_of_instances = 0
+    print_symbol = '#'
 
     def __init__(self, width=0, height=0):
         """
@@ -41,10 +44,10 @@ class Rectangle:
         """
         self.width = width
         self.height = height
+        type(self).number_of_instances += 1
 
     @property
     def width(self):
-        """Property getter for the width"""
         return self.__width
 
     @width.setter
@@ -121,7 +124,7 @@ class Rectangle:
             return ""
         shape_rep_array = []
         for height in range(self.height):
-            shape_rep_array.append("#" * self.width)
+            shape_rep_array.append(self.print_symbol * self.width)
             shape_rep_array.append("\n")
         shape_rep_array.pop()
         return "".join(shape_rep_array)
@@ -130,6 +133,7 @@ class Rectangle:
         return "Rectangle({}, {})".format(self.width, self.height)
 
     def __del__(self):
+        type(self).number_of_instances -= 1
         print("Bye rectangle...")
 
 

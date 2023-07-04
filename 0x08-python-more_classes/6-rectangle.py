@@ -1,24 +1,26 @@
 #!/usr/bin/python3
 
-# 4-rectangle module
+# 6-rectangle module
 """
 This module contains a class Rectangle
 
->>> Rectangle = __import__('4-rectangle').Rectangle
+>>> Rectangle = __import__('6-rectangle').Rectangle
 
 >>> my_rectangle = Rectangle(2, 4)
 >>> print(type(my_rectangle))
-<class '4-rectangle.Rectangle'>
+<class '6-rectangle.Rectangle'>
 
 >>> dict_result = my_rectangle.__dict__
 >>> print(dict(sorted(dict_result.items())))
-{'_Rectangle__height': 4, '_Rectangle__width': 2}
+{'_Rectangle__height': 6, '_Rectangle__width': 2}
 
 """
 
 
 class Rectangle:
     """This is an class Rectangle with instance attribute heigth and width"""
+
+    number_of_instances = 0
 
     def __init__(self, width=0, height=0):
         """
@@ -41,6 +43,7 @@ class Rectangle:
         """
         self.width = width
         self.height = height
+        type(self).number_of_instances += 1
 
     @property
     def width(self):
@@ -130,6 +133,7 @@ class Rectangle:
         return "Rectangle({}, {})".format(self.width, self.height)
 
     def __del__(self):
+        type(self).number_of_instances -= 1
         print("Bye rectangle...")
 
 
